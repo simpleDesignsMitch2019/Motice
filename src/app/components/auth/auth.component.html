@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center align-items-center h-100">
+	<div class="row">
+		<div class="col-sm-12 text-center">
+			<span class="fa-stack fa-2x">
+				<i class="fas fa-square text-primary fa-stack-2x"></i>
+				<i class="fad fa-anchor fa-stack-1x fa-inverse"></i>
+			</span>
+			<h4 class="font-weight-light text-center">
+				<span *ngIf=" state === 'login' ">Please Login</span>
+				<span *ngIf=" state === 'register' ">Let's Get Started</span>
+				<span *ngIf=" state === 'forgot' ">We'll Get You Fixed Up</span>
+				<span *ngIf=" state === 'verify' ">Almost There</span>
+			</h4>
+			<p class="pb-0 mb-0" *ngIf=" state === 'forgot' ">Enter your registered email address and we'll send you instructions right to your inbox.</p>
+			<p class="pb-0 mb-0" *ngIf=" state === 'verify' ">We sent you an email with a verification code to your inbox, please enter that code below.</p>
+			<div class="py-4 animated fadeIn">
+				<router-outlet></router-outlet>
+			</div>
+			<div class="btn-group border-top pt-4 w-100">
+				<button class="btn-sm btn btn-outline-secondary" [routerLink]="['/auth/login']" *ngIf=" state !== 'login' && state !== 'verify' ">Login Instead</button>
+				<button class="btn-sm btn btn-outline-secondary" [routerLink]="['/auth/register']" *ngIf=" state == 'login' ">Register Now</button>
+				<button class="btn-sm btn btn-outline-secondary" [routerLink]="['/auth/forgot']" *ngIf=" state == 'login' ">Forgot Password</button>
+			</div>
+			<p class="mt-4 pt-4 border-top font-weight-light">
+				<i class="fad text-primary fa-code"></i> With <i class="fas fa-heart text-danger"></i> In Harrisonville, MO<br/><br/>
+				<i class="fad fa-copyright"></i> Motice 2020
+			</p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,5 @@
+
+<form [formGroup]="forgotForm">
+	<input type="email" class="form-control" formControlName="email" required placeholder="Email Address" autocomplete="NewEmailAddi" />
+	<button class="btn btn-block btn-primary" [disabled]="!forgotForm.valid">Send Reset Instructions</button>
+</form>

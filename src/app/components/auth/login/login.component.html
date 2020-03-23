@@ -1,0 +1,6 @@
+
+<form [formGroup]="loginForm">
+	<input type="email" class="form-control" formControlName="email" required placeholder="Email Address" autocomplete="NewEmailAddi" />
+	<input type="password" class="form-control" formControlName="passw" required minlength="8" maxlength="12" placeholder="Password" autocomplete="newPasswordAdii" />
+	<button class="btn btn-block btn-primary" [disabled]="!loginForm.valid">Login Now</button>
+</form>

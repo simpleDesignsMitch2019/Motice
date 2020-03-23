@@ -1,0 +1,5 @@
+
+<form [formGroup]="verifyForm">
+	<input type="text" class="form-control" formControlName="code" required placeholder="Verfication Code" autocomplete="verifyCodeAddi" />
+	<button class="btn btn-block btn-primary" [disabled]="!verifyForm.valid">Verify Email</button>
+</form>

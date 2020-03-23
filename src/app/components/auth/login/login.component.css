@@ -1,0 +1,19 @@
+
+input:first-child {
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom: 0px;
+}
+
+input:nth-child(2) {
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
+	border-bottom: 0px;
+}
+
+form > button {
+	border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
+}
