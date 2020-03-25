@@ -1,25 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light animated fadeIn" *ngIf="user">
+<nav class="navbar navbar-expand navbar-dark bg-primary animated fadeIn" *ngIf="user">
   <a class="navbar-brand" [routerLink]="['/dashboard']">Motice</a>
-  <button class="navbar-toggler border-0" type="button" (click)="topBarCollapsed = !topBarCollapsed">
-    <i class="fad fa-ellipsis-v"></i>
-  </button>
 
-  <div class="collapse navbar-collapse" [ngbCollapse]="topBarCollapsed">
+  <div class="navbar-collapse collapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a (click)="leftSidebarVisible = !leftSidebarVisible">
-          <span *ngIf="!leftSidebarVisible"><i class="fad fa-bars"></i></span>
-          <span *ngIf="leftSidebarVisible"><i class="fad fa-times"></i></span>
+          <span *ngIf="!leftSidebarVisible"><i class="fad fa-bars text-white"></i></span>
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" (click)="menu.toggle($event)">
+          <i class="fad fa-ellipsis-v"></i>
         </a>
       </li>
     </ul>
   </div>
 </nav>
 
+<p-menu #menu [popup]="true" [model]="topBarMenuItems"></p-menu>
+
 <p-sidebar [(visible)]="leftSidebarVisible" position="left" styleClass="ui-sidebar-sm" appendTo="body" [showCloseIcon]="false">
   Hello Content
 </p-sidebar>
 
-<div class="animated fadeIn h-100" [ngClass]=" user ? 'container-fluid' : 'bg-light-gray' ">
+<div class="animated fadeIn" [ngClass]=" user ? 'container-fluid' : 'bg-light-gray h-100' ">
   <router-outlet></router-outlet>
 </div>
+
+<p-toast></p-toast>

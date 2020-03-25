@@ -15,15 +15,18 @@ export class VerifyComponent implements OnInit {
   public verifyForm: FormGroup;
 
   constructor( public authService: AuthService, private router: Router ) {
-    const user = firebase.auth().currentUser;
-    if(user.emailVerified) {
-      this.router.navigateByUrl('/dashboard');
-    }
+    authService.user.subscribe((user) => {
+      if(user && user.emailVerified) {
+        this.router.navigateByUrl('/dashboard');
+      } else if(!user) {
+        this.router.navigateByUrl('/login');
+      }
+    });
   }
 
   ngOnInit(): void {
     this.verifyForm = new FormGroup({
-      'code' : new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
+      'code' : new FormControl('', [Validators.required, Validators.maxLength(6), Validators.minLength(6)]),
     });
   }
 

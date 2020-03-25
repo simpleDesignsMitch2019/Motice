@@ -1,5 +1,11 @@
-
-<form [formGroup]="forgotForm">
+<p *ngIf="!code">Enter your registered email address and we'll send you instructions right to your inbox.</p>
+<form [formGroup]="forgotForm" *ngIf="!code">
 	<input type="email" class="form-control" formControlName="email" required placeholder="Email Address" autocomplete="NewEmailAddi" />
-	<button class="btn btn-block btn-primary" [disabled]="!forgotForm.valid">Send Reset Instructions</button>
+	<button class="btn btn-block btn-primary" (click)="authService.SendResetPasswordEmail(forgotForm.controls['email'].value);" [disabled]="!forgotForm.valid">Send Reset Instructions</button>
+</form>
+<p *ngIf="code">Enter your new password below. Once complete, you'll be directed to login with your new password.</p>
+<form [formGroup]="resetPasswordForm" *ngIf="code">
+	<input type="password" class="form-control" formControlName="password" placeholder="New Password" required minlength="8" maxlength="12" autocomplete="newPassAddiA" />
+	<input type="password" class="form-control" formControlName="confirm" placeholder="Confirm Password" required minlength="8" maxlength="12" autocomplete="newConfirmAddiA" />
+	<button class="btn btn-block btn-primary" (click)="authService.CompletePasswordReset(code, resetPasswordForm.controls['password'].value)" [disabled]="!resetPasswordForm.valid || resetPasswordForm.controls['password'].value !== resetPasswordForm.controls['confirm'].value">Reset Password</button>
 </form>

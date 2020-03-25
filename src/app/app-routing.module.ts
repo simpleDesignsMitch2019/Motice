@@ -8,11 +8,18 @@ import { EmailVerifiedGuard } from './shared/guards/emailVerified/email-verified
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+import { ProfileComponent } from './components/profile/profile.component';
+  import { GeneralComponent } from './components/profile/general/general.component';
+  import { CredentialsComponent } from './components/profile/credentials/credentials.component';
+  import { SubscriptionComponent } from './components/profile/subscription/subscription.component';
+
 import { AuthComponent } from './components/auth/auth.component';
   import { LoginComponent } from './components/auth/login/login.component';
   import { RegisterComponent } from './components/auth/register/register.component';
   import { ForgotComponent } from './components/auth/forgot/forgot.component';
   import { VerifyComponent } from './components/auth/verify/verify.component';
+
+
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth/login']);
 
@@ -31,6 +38,33 @@ const routes: Routes = [
     }
   },
   {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AngularFireAuthGuard, EmailVerifiedGuard],
+    data: {
+      authGuardPipe: redirectUnauthorizedToLogin
+    },
+    children: [
+      {
+        path: '',
+        redirectTo: 'general',
+        pathMatch: 'full'
+      },
+      {
+        path: 'general',
+        component: GeneralComponent
+      },
+      {
+        path: 'credentials',
+        component: CredentialsComponent
+      },
+      {
+        path: 'subscription',
+        component: SubscriptionComponent
+      }
+    ]
+  },
+  {
     path: 'auth',
     component: AuthComponent,
     children: [
@@ -47,12 +81,12 @@ const routes: Routes = [
         component: ForgotComponent
       },
       {
+        path: 'forgot/:code',
+        component: ForgotComponent
+      },
+      {
         path: 'verify',
-        component: VerifyComponent,
-        canActivate: [AngularFireAuthGuard],
-        data: {
-          authGuardPipe: redirectUnauthorizedToLogin
-        }
+        component: VerifyComponent
       }
     ]
   }

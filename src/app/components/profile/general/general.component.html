@@ -1,0 +1,31 @@
+
+<h5 class="font-weight-light border-bottom pb-2">My Profile</h5>
+
+<form class="border-bottom mb-2" [formGroup]="generalForm">
+	<div class="form-group row">
+		<label for="displayName" class="col-sm-2 col-form-label">Display Name</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" formControlName="displayName" id="displayName" required />
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="email" class="col-sm-2 col-form-label">Email Address</label>
+		<div class="col-sm-10">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text text-white" [ngClass]=" emailVerified ? 'bg-success' : 'bg-warning' ">
+						<span *ngIf="emailVerified"><i class="fad fa-check"></i></span>
+						<span *ngIf="!emailVerified"><i class="fad fa-times"></i></span>
+					</span>
+				</div>
+				<input type="email" class="form-control" formControlName="email" id="email" required />
+			</div>
+			<small class="form-text text-muted">
+				<span *ngIf="emailVerified">Email address has been verified.</span>
+				<span *ngIf="!emailVerified">You will be prompted to verify your password after saving changes.</span>
+			</small>
+		</div>
+	</div>
+</form>
+
+<button class="btn btn-outline-primary btn-sm float-right" (click)="updateDetails()" [disabled]="!generalForm.valid">Save Changes</button>

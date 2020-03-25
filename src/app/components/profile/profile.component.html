@@ -1,0 +1,26 @@
+<div class="container py-4" *ngIf="authService.user | async as user">
+	<div class="row">
+		<div class="col-sm-12 col-lg-3">
+			<div class="card card-body border-0 justify-content-center align-items-center">
+				<img src="http://api.adorable.io/avatars/75/{{user.email}}" class="rounded-circle mb-2" width="75" />
+				<h4 class="font-weight-light mb-0">{{ user.displayName }}</h4>
+				<p class="font-weight-light">{{ user.email }}</p>
+			</div>
+			<button class="btn btn-sm btn-block btn-outline-primary" [ngClass]="{ 'active' : route === 'general' }" [routerLink]="['/profile/general']">
+				<i class="fad fa-user float-left my-1"></i>
+				My Profile
+			</button>
+			<button class="btn btn-sm btn-block btn-outline-primary" [ngClass]="{ 'active' : route === 'credentials' }" [routerLink]="['/profile/credentials']">
+				<i class="fad fa-lock float-left my-1"></i>
+				My Credentials
+			</button>
+			<button class="btn btn-sm btn-block btn-outline-primary" [ngClass]="{ 'active' : route === 'subscription' }" [routerLink]="['/profile/subscription']">
+				<i class="fad fa-tag float-left my-1"></i>
+				My Subscription
+			</button>
+		</div>
+		<div class="col-sm-12 col-lg-9">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+</div>

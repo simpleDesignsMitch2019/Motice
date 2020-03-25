@@ -1,5 +1,5 @@
 
 <form [formGroup]="verifyForm">
-	<input type="text" class="form-control" formControlName="code" required placeholder="Verfication Code" autocomplete="verifyCodeAddi" />
-	<button class="btn btn-block btn-primary" [disabled]="!verifyForm.valid">Verify Email</button>
+	<input type="text" class="form-control" formControlName="code" required minlength="6" maxlength="6" placeholder="Verification Code" autocomplete="NewCodeAddi" />
+	<button class="btn btn-block btn-primary" (click)="authService.CompleteEmailVerification(verifyForm.controls['code'].value)" [disabled]="!verifyForm.valid">Verify Email Address</button>
 </form>

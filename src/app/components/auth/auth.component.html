@@ -11,15 +11,15 @@
 				<span *ngIf=" state === 'forgot' ">We'll Get You Fixed Up</span>
 				<span *ngIf=" state === 'verify' ">Almost There</span>
 			</h4>
-			<p class="pb-0 mb-0" *ngIf=" state === 'forgot' ">Enter your registered email address and we'll send you instructions right to your inbox.</p>
 			<p class="pb-0 mb-0" *ngIf=" state === 'verify' ">We sent you an email with a verification code to your inbox, please enter that code below.</p>
-			<div class="py-4 animated fadeIn">
+			<div class="animated fadeIn" [ngClass]=" state !== 'verify' ? '' : 'py-4' ">
 				<router-outlet></router-outlet>
 			</div>
 			<div class="btn-group border-top pt-4 w-100">
 				<button class="btn-sm btn btn-outline-secondary" [routerLink]="['/auth/login']" *ngIf=" state !== 'login' && state !== 'verify' ">Login Instead</button>
 				<button class="btn-sm btn btn-outline-secondary" [routerLink]="['/auth/register']" *ngIf=" state == 'login' ">Register Now</button>
 				<button class="btn-sm btn btn-outline-secondary" [routerLink]="['/auth/forgot']" *ngIf=" state == 'login' ">Forgot Password</button>
+				<button class="btn-sm btn btn-outline-secondary" (click)="authService.SendVerificationEmail();" *ngIf=" state == 'verify' ">Resend Email</button>
 			</div>
 			<p class="mt-4 pt-4 border-top font-weight-light">
 				<i class="fad text-primary fa-code"></i> With <i class="fas fa-heart text-danger"></i> In Harrisonville, MO<br/><br/>

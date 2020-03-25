@@ -17,6 +17,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { SidebarModule } from 'primeng/sidebar';
+import { ToastModule } from 'primeng/toast';
+import { MenuModule } from 'primeng/menu';
+import { MessageService } from 'primeng/api';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +31,10 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { ForgotComponent } from './components/auth/forgot/forgot.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { VerifyComponent } from './components/auth/verify/verify.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { GeneralComponent } from './components/profile/general/general.component';
+import { CredentialsComponent } from './components/profile/credentials/credentials.component';
+import { SubscriptionComponent } from './components/profile/subscription/subscription.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +44,11 @@ import { VerifyComponent } from './components/auth/verify/verify.component';
     RegisterComponent,
     ForgotComponent,
     DashboardComponent,
-    VerifyComponent
+    VerifyComponent,
+    ProfileComponent,
+    GeneralComponent,
+    CredentialsComponent,
+    SubscriptionComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +61,11 @@ import { VerifyComponent } from './components/auth/verify/verify.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    SidebarModule
+    SidebarModule,
+    ToastModule,
+    MenuModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
