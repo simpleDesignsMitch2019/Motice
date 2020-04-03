@@ -5,5 +5,7 @@ export interface User {
   verificationCode?: string | number,
   verificationCodeCreated?: object,
   photoURL?: string,
-  displayName?: string
+  displayName?: string,
+  stripeCustomerId?: string,
+  subscriptionId?: string
 }

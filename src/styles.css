@@ -6,6 +6,10 @@ html {
 	height: 100%;
 }
 
+body {
+	
+}
+
 textarea:hover, 
 input:hover, 
 textarea:active, 
@@ -30,4 +34,12 @@ a {
 
 .bg-light-gray {
 	background-color: #e9ecef !important;
+}
+
+.ui-menu, .ui-toast {
+	z-index: 1050 !important;
+}
+
+.ui-sidebar {
+	padding-top: 80px !important;
 }

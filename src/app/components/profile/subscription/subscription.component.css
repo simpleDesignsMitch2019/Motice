@@ -1,0 +1,12 @@
+
+.ui-dialog-content {
+	padding: 0px !important;
+}
+
+.list-group-item-action {
+	cursor: pointer;
+}
+
+.brand {
+	font-size: 18px;
+}

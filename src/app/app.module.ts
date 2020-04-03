@@ -18,8 +18,17 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
+import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 import { MenuModule } from 'primeng/menu';
+import { TooltipModule } from 'primeng/tooltip';
 import { MessageService } from 'primeng/api';
+import { PanelModule } from 'primeng/panel';
+
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
+import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION, PB_DIRECTION } from 'ngx-ui-loader';
+
+import { NgxStripeModule } from 'ngx-stripe';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,36 +45,73 @@ import { GeneralComponent } from './components/profile/general/general.component
 import { CredentialsComponent } from './components/profile/credentials/credentials.component';
 import { SubscriptionComponent } from './components/profile/subscription/subscription.component';
 
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+    "bgsColor": "#007bff",
+    "bgsOpacity": 0.5,
+    "bgsPosition": "bottom-right",
+    "bgsSize": 60,
+    "bgsType": "fading-circle",
+    "blur": 12,
+    "delay": 0,
+    "fastFadeOut": true,
+    "fgsColor": "#007bff",
+    "fgsPosition": "top-right",
+    "fgsSize": 30,
+    "fgsType": "pulse",
+    "gap": 10,
+    "logoPosition": "top-left",
+    "logoSize": 0,
+    "logoUrl": "assets/logo.png",
+    "masterLoaderId": "master",
+    "overlayBorderRadius": "0",
+    "overlayColor": "rgba(40, 40, 40, 0.8)",
+    "pbColor": "#007bff",
+    "pbDirection": "ltr",
+    "pbThickness": 2,
+    "hasProgressBar": true,
+    "text": "",
+    "textColor": "#FFFFFF",
+    "textPosition": "top-left",
+    "maxTime": -1,
+    "minTime": 300
+}
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    AuthComponent,
-    LoginComponent,
-    RegisterComponent,
-    ForgotComponent,
-    DashboardComponent,
-    VerifyComponent,
-    ProfileComponent,
-    GeneralComponent,
-    CredentialsComponent,
-    SubscriptionComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgbModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    SidebarModule,
-    ToastModule,
-    MenuModule
-  ],
-  providers: [MessageService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        AuthComponent,
+        LoginComponent,
+        RegisterComponent,
+        ForgotComponent,
+        DashboardComponent,
+        VerifyComponent,
+        ProfileComponent,
+        GeneralComponent,
+        CredentialsComponent,
+        SubscriptionComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgbModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        AngularFireStorageModule,
+        NgxStripeModule.forRoot(environment.stripePKey),
+        SidebarModule,
+        ToastModule,
+        TooltipModule,
+        NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+        PanelModule,
+        DynamicDialogModule,
+        MenuModule,
+        SweetAlert2Module.forRoot()
+    ],
+    providers: [MessageService, DialogService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

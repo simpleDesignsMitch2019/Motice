@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-dark bg-primary animated fadeIn" *ngIf="user">
+<nav class="navbar navbar-expand navbar-dark bg-primary animated fadeIn fixed-top" *ngIf="user">
   <a class="navbar-brand" [routerLink]="['/dashboard']">Motice</a>
 
   <div class="navbar-collapse collapse">
@@ -6,6 +6,7 @@
       <li class="nav-item">
         <a (click)="leftSidebarVisible = !leftSidebarVisible">
           <span *ngIf="!leftSidebarVisible"><i class="fad fa-bars text-white"></i></span>
+          <span *ngIf="leftSidebarVisible"><i class="fad fa-times text-white"></i></span>
         </a>
       </li>
     </ul>
@@ -25,8 +26,10 @@
   Hello Content
 </p-sidebar>
 
-<div class="animated fadeIn" [ngClass]=" user ? 'container-fluid' : 'bg-light-gray h-100' ">
+<div class="animated fadeIn" [ngClass]=" user ? 'container-fluid app-wrapper' : 'bg-light-gray h-100' ">
   <router-outlet></router-outlet>
 </div>
 
 <p-toast></p-toast>
+
+<ngx-ui-loader></ngx-ui-loader>

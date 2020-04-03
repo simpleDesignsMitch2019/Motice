@@ -1,1 +1,186 @@
-<p>subscription works!</p>
+
+<div *ngIf="authService.user | async as user">
+
+	<h5 class="font-weight-light border-bottom pb-2">My Subscription</h5>
+
+	<div class="d-flex justify-content-center align-items-center border-bottom py-3" *ngIf="!user.subscriptionId || !user.stripeCustomerId">
+
+		<div class="text-center">
+
+			<img src="./assets/logo.png" width="60" class="rounded-circle mb-2" />
+
+			<h5>Motice Standard</h5>
+
+			<h6><span class="text-success">$9.99</span> Per Month</h6>
+
+			<p>Subscribing provides you unlimited access to the Motice platform.</p>
+
+			<ul class="fa-ul text-left">
+				<li><span class="fa-li"><i class="fad fa-infinity"></i></span> Users</li>
+				<li><span class="fa-li"><i class="fad fa-infinity"></i></span> Estimates &amp; Invoices</li>
+				<li><span class="fa-li"><i class="fad fa-infinity"></i></span> Clients</li>
+				<li><span class="fa-li"><i class="fad fa-infinity"></i></span> Payments</li>
+				<li><span class="fa-li"><i class="fad fa-infinity"></i></span> Projects</li>
+				<li><span class="fa-li"><i class="fad fa-infinity"></i></span> Everything...</li>
+			</ul>
+
+			<button class="btn btn-primary" (click)="openSubscribeDialog()">Subscribe Today</button>
+
+		</div>
+
+	</div>
+
+	<div class="border-bottom py-3 clearfix" *ngIf="user.subscriptionId && user.stripeCustomerId">
+
+		<div class="alert border-primary">
+			<span *ngIf=" subscription?.status == 'trialing' ">
+				<i class="fas fa-circle text-info mr-3"></i> <b>Motice is trialing</b><br/>
+				We hope you are enjoying your current trial of the motice platform. Your free trial will end on {{ subscription?.trial_end*1000 | date }}
+			</span>
+			<span *ngIf=" subscription?.status == 'active' ">
+				<i class="fas fa-circle text-success mr-3"></i> <b>Motice is active</b><br/>
+				We have collected your subscription dues for the current period and your account is in good standing.
+			</span>
+			<span *ngIf=" subscription?.status == 'past_due' ">
+				<i class="fas fa-circle text-warning mr-3"></i> <b>Motice is Past Due</b><br/>
+				We are having an issue charging your payment method on file, please update your details below to prevent suspension of your service.
+			</span>
+			<span *ngIf=" subscription?.status == 'unpaid' ">
+				<i class="fas fa-circle text-danger mr-3"></i> <b>Motice is Unpaid</b><br/>
+				We have failed to collect your payment for your subscription, please update your details below to regain full access to the Motice platform.
+			</span>
+		</div>
+
+		<div class="badges mb-4">
+			<a href [routerLink]="[]" class="badge badge-pill badge-primary mr-3" pTooltip="Status" tooltipPosition="bottom">
+				{{ subscription?.status.replace('_', ' ') | uppercase }}
+			</a>
+			<a href [routerLink]="[]" class="badge badge-pill badge-primary mr-3" pTooltip="Created" tooltipPosition="bottom">
+				{{ subscription?.created*1000 | date }}
+			</a>
+			<a href [routerLink]="[]" class="badge badge-pill badge-primary mr-3" pTooltip="Current Billing Cycle" tooltipPosition="bottom">
+				{{ subscription?.current_period_start*1000 | date }} - {{ subscription?.current_period_end*1000 | date }}
+			</a>
+			<a href [routerLink]="[]" class="badge badge-pill badge-primary mr-3" pTooltip="Next Charge Date" tooltipPosition="bottom">
+				{{ findChargeDate(subscription) | date }}
+			</a>
+			<a href [routerLink]="[]" class="badge badge-pill badge-primary mr-3" pTooltip="Plan" tooltipPosition="bottom">
+				{{ subscription?.plan.nickname }}
+			</a>
+			<a href [routerLink]="[]" class="badge badge-pill badge-primary mr-3" pTooltip="Plan Rate" tooltipPosition="bottom">
+				{{ subscription?.plan.amount_decimal/100 | currency }}
+			</a>
+			<a href [routerLink]="[]" class="badge badge-pill badge-primary mr-3" pTooltip="Plan Interval" tooltipPosition="bottom">
+				{{ subscription?.plan.interval_count }} / {{ subscription?.plan.interval }}
+			</a>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-sm-12 col-lg-6">
+				<div class="card">
+					<div class="card-header">
+						Your Balance
+					</div>
+					<div class="card-body d-flex justify-content-center align-items-center">
+						<h4>{{ customer?.account_balance | currency }} <small><span class="text-muted">{{ customer?.currency }}</span></small></h4>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-lg-6">
+				<div class="card">
+					<div class="card-header d-flex justify-content-between align-items-center">
+						Cards
+						<a href [routerLink]="" (click)="openAddCardDialog()"><i class="fad fa-plus"></i></a>
+					</div>
+					<div class="card-body p-0">
+						<div class="list-group">
+							<div class="list-group-item rounded-0" *ngFor="let method of paymentMethods" [ngClass]="{ 'bg-primary text-white' : method.id == defaultMethod }">
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="brand">
+										<i *ngIf="method.card.brand == 'visa' " class="fa fa-cc-visa"></i>
+										<i *ngIf="method.card.brand == 'mastercard' " class="fa fa-cc-mastercard"></i>
+										<i *ngIf="method.card.brand == 'discover' " class="fa fa-cc-discover"></i>
+										<i *ngIf="method.card.brand == 'amex' " class="fa fa-cc-amex"></i>
+										<i *ngIf="method.card.brand == 'diners' " class="fa fa-cc-diners-club"></i>
+										<i *ngIf="method.card.brand == 'jcb' " class="fa fa-cc-jcb"></i>
+										<i *ngIf="method.card.brand == 'unionpay' " class="fa fa-cc-stripe"></i>
+									</div>
+									<div class="number">
+										<span style="font-size:8px; vertical-align:top;">
+											<i class="fas pr-1 fa-circle"></i>
+											<i class="fas pr-1 fa-circle"></i>
+											<i class="fas pr-1 fa-circle"></i>
+											<i class="fas pr-1 fa-circle"></i>
+										</span> {{ method.card.last4 }}
+									</div>
+									<div class="expiration">
+										{{ method.card.exp_month }} / {{ method.card.exp_year }}
+									</div>
+									<div class="actions" *ngIf="method.id !== defaultMethod">
+										<button class="btn btn-link" pTooltip="Make Primary" tooltipPosition="top" [swal]="setDefaultPaymentSwal" (confirm)="setDefaultMethod(method.id)">
+											<i class="fad fa-arrow-up"></i>
+										</button>
+										<button class="btn btn-link text-danger" pTooltip="Delete" tooltipPosition="top" [swal]="updatePaymentMethodSwal" (confirm)="deleteMethod(method.id)">
+											<i class="fad fa-times"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						Payments
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Amount</th>
+								<th>Description</th>
+								<th width="25%">Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let item of charges">
+								<td class="d-flex justify-content-between align-items-center">
+									<span>{{ item.amount/100 | currency }}</span>
+									<span class="text-secondary">{{ item.currency | uppercase }}</span>
+									<span class="badge badge-pill" [ngClass]="statusCheck(item.status)">
+										{{ item.status }} 
+										<i *ngIf="item.status == 'succeeded'" class="fas fa-check pl-1"></i>
+										<i *ngIf="item.status == 'pending'" class="fas fa-spinner-third pl-1"></i>
+										<i *ngIf="item.status == 'failed'" class="fas fa-times pl-1"></i>
+									</span>
+								</td>
+								<td>Subscription Creation</td>
+								<td width="25%">{{ item.created*1000 | date:'MMM d, y, h:mm a' }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<button class="btn btn-sm btn-outline-danger float-right" [swal]="cancelSubscription" (confirm)="cancelSubscriptionNow()">Cancel Subscription</button>
+
+	</div>
+
+	<a href="https://www.stripe.com/" target="_blank" class="float-right" pTooltip="Subscription Powered By" tooltipPosition="bottom"><h3><i class="fab fa-stripe text-primary"></i></h3></a>
+
+</div>
+
+<swal #updatePaymentMethodSwal title="Delete Payment Method" text="Are you sure you want to delete this payment method?" icon="question" [showCancelButton]="true"></swal>
+
+<swal #setDefaultPaymentSwal title="Set Default Payment" text="Are you sure you want to change your default payment method?" icon="question" [showCancelButton]="true"></swal>
+
+<swal #cancelSubscription title="Cancel Subscription" text="Are you sure you want to cancel your subscription? You will immediately loose access to Motice" icon="question" [showCancelButton]="true"></swal>
+
+
+
+

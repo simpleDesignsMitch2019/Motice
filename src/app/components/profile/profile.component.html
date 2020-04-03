@@ -1,5 +1,5 @@
-<div class="container py-4" *ngIf="authService.user | async as user">
-	<div class="row">
+<div class="container pb-4" *ngIf="authService.user | async as user">
+	<div class="row h-100">
 		<div class="col-sm-12 col-lg-3">
 			<div class="card card-body border-0 justify-content-center align-items-center">
 				<img src="http://api.adorable.io/avatars/75/{{user.email}}" class="rounded-circle mb-2" width="75" />
@@ -19,7 +19,7 @@
 				My Subscription
 			</button>
 		</div>
-		<div class="col-sm-12 col-lg-9">
+		<div class="col-sm-12 col-lg-9 h-100">
 			<router-outlet></router-outlet>
 		</div>
 	</div>
