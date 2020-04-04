@@ -13,6 +13,8 @@ import { ProfileComponent } from './components/profile/profile.component';
   import { CredentialsComponent } from './components/profile/credentials/credentials.component';
   import { SubscriptionComponent } from './components/profile/subscription/subscription.component';
 
+import { ClientsComponent } from './components/clients/clients.component';
+
 import { AuthComponent } from './components/auth/auth.component';
   import { LoginComponent } from './components/auth/login/login.component';
   import { RegisterComponent } from './components/auth/register/register.component';
@@ -63,6 +65,14 @@ const routes: Routes = [
         component: SubscriptionComponent
       }
     ]
+  },
+  {
+    path: 'clients',
+    component: ClientsComponent,
+    canActivate: [AngularFireAuthGuard, EmailVerifiedGuard],
+    data: {
+      authGuardPipe: redirectUnauthorizedToLogin
+    }
   },
   {
     path: 'auth',

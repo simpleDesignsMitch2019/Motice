@@ -1,0 +1,101 @@
+<div class="sidebar-header p-2 border-bottom d-flex justify-content-between align-items-top">
+	<h5 class="font-weight-light">Create Client</h5>
+	<a href [routerLink]="" (click)="close()" class="text-danger pr-2"><i class="fad fa-times"></i></a>
+</div>
+<div class="sidebar-content p-2">
+	<form [formGroup]="newClientForm">
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Number</label>
+					<input type="number" class="form-control" formControlName="number" placeholder="854956205455" required />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Opening Balance</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+    						<span class="input-group-text" id="basic-addon1"><i class="fad fa-dollar-sign"></i></span>
+  						</div>
+						<input type="number" class="form-control" formControlName="currentBalance" placeholder="150.00" required />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Company</label>
+			<input type="text" class="form-control" formControlName="company" placeholder="Doe Enterprises" required />
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">First Name</label>
+					<input type="text" class="form-control" formControlName="first_name" placeholder="John" required />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Last Name</label>
+					<input type="text" class="form-control" formControlName="last_name" placeholder="Doe" required />
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Email Address</label>
+			<input type="email" class="form-control" formControlName="email" placeholder="john.doe@doeenterprises.com" required />
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Phone</label>
+					<input type="text" class="form-control" formControlName="phone" placeholder="(555) 555-5555" required minlength="10" maxlength="10" />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Fax</label>
+					<input type="text" class="form-control" formControlName="fax" placeholder="(555) 555-5555" minlength="10" maxlength="10" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Address Line 1</label>
+					<input type="text" class="form-control" formControlName="addressLine1" placeholder="505 Somewhere St" required />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Line 2</label>
+					<input type="text" class="form-control" formControlName="addressLine2" placeholder="Office 1550" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">City</label>
+					<input type="text" class="form-control" formControlName="city" placeholder="Sometown" required />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">State</label>
+					<input type="text" class="form-control" formControlName="state" placeholder="KS" required maxlength="2" minlength="2" />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Zip Code</label>
+					<input type="text" class="form-control" formControlName="zip_code" placeholder="64752" required minlength="5" maxlength="5" />
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="sidebar-footer">
+	<button class="btn btn-secondary" (click)="close()">Cancel</button>
+	<button class="btn btn-primary" [disabled]="!newClientForm.valid" (click)="createClient()">Create</button>
+</div>

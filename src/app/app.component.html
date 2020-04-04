@@ -22,11 +22,20 @@
 
 <p-menu #menu [popup]="true" [model]="topBarMenuItems"></p-menu>
 
-<p-sidebar [(visible)]="leftSidebarVisible" position="left" styleClass="ui-sidebar-sm" appendTo="body" [showCloseIcon]="false">
-  Hello Content
+<p-sidebar [(visible)]="leftSidebarVisible" position="left" styleClass="ui-sidebar-sm p-0 mainSidebar" appendTo="body" [showCloseIcon]="false">
+  <div class="list-group list-group-flush">
+    <a href class="list-group-item list-group-item-action" [routerLink]="['/dashboard']" (click)="leftSidebarVisible = !leftSidebarVisible">
+      <i class="fad fa-fw fa-chart-network"></i>
+      Dashboard
+    </a>
+    <a href class="list-group-item list-group-item-action" [routerLink]="['/clients']" (click)="leftSidebarVisible = !leftSidebarVisible">
+      <i class="fad fa-fw fa-users"></i>
+      Clients
+    </a>
+  </div>
 </p-sidebar>
 
-<div class="animated fadeIn" [ngClass]=" user ? 'container-fluid app-wrapper' : 'bg-light-gray h-100' ">
+<div class="animated fadeIn" [ngClass]=" user ? 'container-fluid app-wrapper' : 'bg-light-gray h-100' " modal="false">
   <router-outlet></router-outlet>
 </div>
 

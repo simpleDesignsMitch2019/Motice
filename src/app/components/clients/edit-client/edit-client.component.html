@@ -1,0 +1,93 @@
+<div class="loading-overlay d-flex justify-content-center align-items-center" *ngIf="loading">
+	<i class="fad fa-spinner fa-3x text-primary fa-spin"></i>
+</div>
+<div class="sidebar-header p-2 border-bottom d-flex justify-content-between align-items-top">
+	<h5 class="font-weight-light">Edit Client</h5>
+	<a href [routerLink]="" (click)="close()" class="text-danger pr-2"><i class="fad fa-times"></i></a>
+</div>
+<div class="sidebar-content p-2">
+	<form [formGroup]="editClientForm">
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Number</label>
+					<input type="number" class="form-control" formControlName="number" required />
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Company</label>
+			<input type="text" class="form-control" formControlName="company" required />
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">First Name</label>
+					<input type="text" class="form-control" formControlName="first_name" required />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Last Name</label>
+					<input type="text" class="form-control" formControlName="last_name" required />
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Email Address</label>
+			<input type="email" class="form-control" formControlName="email" required />
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Phone</label>
+					<input type="text" class="form-control" formControlName="phone" required minlength="10" maxlength="10" />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Fax</label>
+					<input type="text" class="form-control" formControlName="fax" minlength="10" maxlength="10" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Address Line 1</label>
+					<input type="text" class="form-control" formControlName="addressLine1" required />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Line 2</label>
+					<input type="text" class="form-control" formControlName="addressLine2" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">City</label>
+					<input type="text" class="form-control" formControlName="city" required />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">State</label>
+					<input type="text" class="form-control" formControlName="state" required maxlength="2" minlength="2" />
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label">Zip Code</label>
+					<input type="text" class="form-control" formControlName="zip_code" required minlength="5" maxlength="5" />
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="sidebar-footer">
+	<button class="btn btn-secondary" (click)="close()">Cancel</button>
+	<button class="btn btn-primary" [disabled]="!editClientForm.valid" (click)="updateClient()">Update</button>
+</div>

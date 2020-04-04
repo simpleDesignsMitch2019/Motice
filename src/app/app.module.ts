@@ -30,6 +30,8 @@ import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION, PB_DIRECTION }
 
 import { NgxStripeModule } from 'ngx-stripe';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -44,6 +46,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { GeneralComponent } from './components/profile/general/general.component';
 import { CredentialsComponent } from './components/profile/credentials/credentials.component';
 import { SubscriptionComponent } from './components/profile/subscription/subscription.component';
+import { ClientsComponent } from './components/clients/clients.component';
+import { CreateClientComponent } from './components/clients/create-client/create-client.component';
+import { PhonePipe } from './shared/pipes/phone.pipe';
+import { EditClientComponent } from './components/clients/edit-client/edit-client.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     "bgsColor": "#007bff",
@@ -88,7 +94,11 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         ProfileComponent,
         GeneralComponent,
         CredentialsComponent,
-        SubscriptionComponent
+        SubscriptionComponent,
+        ClientsComponent,
+        CreateClientComponent,
+        PhonePipe,
+        EditClientComponent
     ],
     imports: [
         BrowserModule,
@@ -109,9 +119,10 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         PanelModule,
         DynamicDialogModule,
         MenuModule,
-        SweetAlert2Module.forRoot()
+        SweetAlert2Module.forRoot(),
+        Ng2SearchPipeModule
     ],
-    providers: [MessageService, DialogService],
+    providers: [MessageService, DialogService, ClientsComponent],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
