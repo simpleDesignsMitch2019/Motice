@@ -78,4 +78,12 @@ export class ClientsComponent implements OnInit {
     return this.singleClient;
   }
 
+  delete(client) {
+    this.clientsService.DeleteClient(client.id).then((response) => {
+      this.loadClients();
+    }).catch((error) => {
+
+    });
+  }
+
 }
