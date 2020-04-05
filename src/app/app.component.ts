@@ -101,6 +101,11 @@ export class AppComponent {
         separator: true,
         items: [
           {
+            label: 'Settings',
+            icon: 'fad fa-fw fa-cog text-primary',
+            routerLink: ['/settings']
+          },
+          {
             label: 'Logout',
             icon: 'fad fa-fw fa-sign-out',
             command: (event) => {
