@@ -52,6 +52,9 @@ import { CreateClientComponent } from './components/clients/create-client/create
 import { PhonePipe } from './shared/pipes/phone.pipe';
 import { EditClientComponent } from './components/clients/edit-client/edit-client.component';
 import { CompaniesComponent } from './components/profile/companies/companies.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { NotesComponent } from './components/notes/notes.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     "bgsColor": "#007bff",
@@ -101,7 +104,10 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         CreateClientComponent,
         PhonePipe,
         EditClientComponent,
-        CompaniesComponent
+        CompaniesComponent,
+        CalendarComponent,
+        TasksComponent,
+        NotesComponent
     ],
     imports: [
         BrowserModule,

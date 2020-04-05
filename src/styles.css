@@ -41,26 +41,35 @@ a {
 }
 
 .ui-sidebar {
-	padding-top: 80px !important;
+	padding-top: 60px !important;
 }
 
-.mainSidebar > .list-group > .list-group-item {
+.mainSidebar > .list-group > .list-group-item, .mainSidebar > .sidebar-footer > .list-group > .list-group-item {
 	border-bottom: 0px !important;
 }
 
-.mainSidebar > .list-group > .list-group-item > svg {
+.mainSidebar > .list-group > .list-group-item > svg, .mainSidebar > .sidebar-footer > .list-group > .list-group-item > svg {
 	margin-right: 15px;
 	font-size: 14px;
 	opacity: 0.8;
 }
 
-.mainSidebar > .list-group > .list-group-item:hover {
+.mainSidebar > .list-group > .list-group-item:hover, .mainSidebar > .sidebar-footer > .list-group > .list-group-item:hover {
 	background-color: #d6d8db;
 	color: #383d41
 }
 
-.mainSidebar > .list-group > .list-group-item:hover > svg {
+.mainSidebar > .list-group > .list-group-item:hover > svg, .mainSidebar > .sidebar-footer > .list-group > .list-group-item:hover > svg {
 	opacity: 1;
+}
+
+.legal:hover {
+	cursor: default;
+	background-color: transparent !important;
+}
+
+.legal > svg{
+	margin-right: 0px !important;
 }
 
 .sidebar-content {

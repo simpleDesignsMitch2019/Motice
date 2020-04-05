@@ -26,7 +26,12 @@
 <p-menu #menu [popup]="true" [model]="topBarMenuItems"></p-menu>
 
 <p-sidebar [(visible)]="leftSidebarVisible" position="left" styleClass="ui-sidebar-sm p-0 mainSidebar" appendTo="body" [showCloseIcon]="false">
-  <div class="list-group list-group-flush">
+  <div class="card card-body border-0 justify-content-center align-items-center">
+    <img src="http://api.adorable.io/avatars/60/{{user?.email}}" class="rounded-circle mb-2" width="60" />
+    <h4 class="font-weight-light mb-0">{{ user?.displayName }}</h4>
+    <p class="font-weight-light">{{ user?.email }}</p>
+  </div>
+  <div class="list-group list-group-flush border-top pt-3">
     <a href class="list-group-item list-group-item-action" [routerLink]="['/dashboard']" (click)="leftSidebarVisible = !leftSidebarVisible">
       <i class="fad fa-fw fa-chart-network"></i>
       Dashboard
@@ -35,6 +40,19 @@
       <i class="fad fa-fw fa-users"></i>
       Clients
     </a>
+  </div>
+  <div class="sidebar-footer border-top pt-3">
+    <div class="list-group list-group-flush">
+      <a href="http://help.motice.io" class="list-group-item list-group-item-action" target="_blank">
+        <i class="fad fa-fw fa-life-ring"></i>
+        Help &amp; Support
+      </a>
+      <div class="list-group-item text-left border-top legal mt-3">
+        <img src="./assets/logo.png" width="40" class="float-left mr-2 rounded-circle" />
+        <i class="fad fa-copyright"></i> Motice 2020 All Rights Reserved<br/>
+        <span class="text-center">Made With <i class="fad fa-heart text-danger"></i> In Harrisonville, MO</span>
+      </div>
+    </div>
   </div>
 </p-sidebar>
 
@@ -45,3 +63,17 @@
 <p-toast></p-toast>
 
 <ngx-ui-loader></ngx-ui-loader>
+
+<p-sidebar [(visible)]="calendarSidebarVisible" position="right" styleClass="ui-sidebar-sm p-0" appendTo="body" [showCloseIcon]="false">
+  <app-calendar></app-calendar>
+</p-sidebar>
+
+<p-sidebar [(visible)]="tasksSidebarVisible" position="right" styleClass="ui-sidebar-sm p-0" appendTo="body" [showCloseIcon]="false">
+  <app-tasks></app-tasks>
+</p-sidebar>
+
+<p-sidebar [(visible)]="notesSidebarVisible" position="right" styleClass="ui-sidebar-sm p-0" appendTo="body" [showCloseIcon]="false">
+  <app-notes></app-notes>
+</p-sidebar>
+
+
