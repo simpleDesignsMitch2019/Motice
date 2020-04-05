@@ -23,6 +23,7 @@ import { MenuModule } from 'primeng/menu';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService } from 'primeng/api';
 import { PanelModule } from 'primeng/panel';
+import { InputMaskModule } from 'primeng/inputmask';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
@@ -50,6 +51,7 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { CreateClientComponent } from './components/clients/create-client/create-client.component';
 import { PhonePipe } from './shared/pipes/phone.pipe';
 import { EditClientComponent } from './components/clients/edit-client/edit-client.component';
+import { CompaniesComponent } from './components/profile/companies/companies.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     "bgsColor": "#007bff",
@@ -98,7 +100,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         ClientsComponent,
         CreateClientComponent,
         PhonePipe,
-        EditClientComponent
+        EditClientComponent,
+        CompaniesComponent
     ],
     imports: [
         BrowserModule,
@@ -120,7 +123,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         DynamicDialogModule,
         MenuModule,
         SweetAlert2Module.forRoot(),
-        Ng2SearchPipeModule
+        Ng2SearchPipeModule,
+        InputMaskModule
     ],
     providers: [MessageService, DialogService, ClientsComponent],
     bootstrap: [AppComponent]

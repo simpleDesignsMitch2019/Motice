@@ -12,6 +12,7 @@ import { ProfileComponent } from './components/profile/profile.component';
   import { GeneralComponent } from './components/profile/general/general.component';
   import { CredentialsComponent } from './components/profile/credentials/credentials.component';
   import { SubscriptionComponent } from './components/profile/subscription/subscription.component';
+  import { CompaniesComponent } from './components/profile/companies/companies.component';
 
 import { ClientsComponent } from './components/clients/clients.component';
 
@@ -63,6 +64,10 @@ const routes: Routes = [
       {
         path: 'subscription',
         component: SubscriptionComponent
+      },
+      {
+        path: 'companies',
+        component: CompaniesComponent
       }
     ]
   },

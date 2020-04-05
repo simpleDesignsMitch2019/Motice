@@ -67,6 +67,7 @@ export class AuthService {
       this.afAuth.signOut().then(() => {
         this.user = null;
         this.router.navigateByUrl('/auth/login');
+        localStorage.removeItem('activeCompany');
         resolve();
       }).catch((error) => {
         this.messageService.add({severity:'error', summary:'', detail:error.message});
@@ -86,6 +87,9 @@ export class AuthService {
     }
     const authUser = firebase.auth().currentUser;
     authUser.updateProfile({'displayName' : user?.displayName, 'photoURL' : user?.photoURL});
+    if(user.company) {
+      data['company'] = user.company;
+    }
     return userRef.set(data, { merge: true });
   }
 

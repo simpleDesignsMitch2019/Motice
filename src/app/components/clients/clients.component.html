@@ -12,7 +12,7 @@
 					<input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Search Clients..." />
 				</div>
 				<div class="col-sm-2 pl-2 pt-1">
-					<button class="btn btn-primary btn-sm rounded-circle" pTooltip="Create Client" tooltipPosition="left" (click)="newSidebarVisible = !newSidebarVisible" [disabled]="clientMax"><i class="fad fa-plus"></i></button>
+					<button class="btn btn-primary btn-sm rounded-circle" pTooltip="Create Client" tooltipPosition="left" (click)="newSidebarVisible = !newSidebarVisible" [disabled]="clientMax && clientCount == clientMax"><i class="fad fa-plus"></i></button>
 				</div>
 			</div>
 		</div>

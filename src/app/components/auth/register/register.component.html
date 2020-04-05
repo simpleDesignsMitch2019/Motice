@@ -1,5 +1,6 @@
 
 <form [formGroup]="registerForm">
+	<input type="text" class="form-control" formControlName="company" required placeholder="Company Name" autocomplete="newCompanyNameAddi" />
 	<input type="text" class="form-control" formControlName="name" required placeholder="Your Name" autocomplete="newFullnameAddi" />
 	<input type="email" class="form-control" formControlName="email" required placeholder="Email Address" autocomplete="NewEmailAddi" />
 	<input type="password" class="form-control" formControlName="passw" required minlength="8" maxlength="12" placeholder="Password" autocomplete="newPasswordAdii" />

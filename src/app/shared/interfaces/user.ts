@@ -7,5 +7,6 @@ export interface User {
   photoURL?: string,
   displayName?: string,
   stripeCustomerId?: string,
-  subscriptionId?: string
+  subscriptionId?: string,
+  company?: string
 }

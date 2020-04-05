@@ -10,6 +10,10 @@
 				<i class="fad fa-user float-left my-1"></i>
 				My Profile
 			</button>
+			<button class="btn btn-sm btn-block btn-outline-primary" [ngClass]="{ 'active' : route === 'companies' }" [routerLink]="['/profile/companies']">
+				<i class="fad fa-building float-left my-1"></i>
+				My Company
+			</button>
 			<button class="btn btn-sm btn-block btn-outline-primary" [ngClass]="{ 'active' : route === 'credentials' }" [routerLink]="['/profile/credentials']">
 				<i class="fad fa-lock float-left my-1"></i>
 				My Credentials

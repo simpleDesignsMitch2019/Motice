@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from './shared/services/auth/auth.service';
+import { CompanyService } from './shared/services/company/company.service';
 import { User } from './shared/interfaces/user';
+import { Company } from './shared/interfaces/company';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +14,11 @@ import { User } from './shared/interfaces/user';
 export class AppComponent {
 
   public user: User;
+  public company: Company;
   public leftSidebarVisible: boolean = false;
   public topBarMenuItems: object = [];
 
-  constructor(public authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, public companyService: CompanyService, private router: Router) {
     authService.user.subscribe((user) => {
       if(user && !user.emailVerified) {
         this.user = null;
@@ -23,6 +26,13 @@ export class AppComponent {
         this.user = user;
       } else {
         this.user = null;
+      }
+    });
+    companyService.company.subscribe((observer) => {
+      if(observer) {
+        observer.subscribe((company) => {
+          this.company = company;
+        });
       }
     });
     this.topBarMenuItems = [
@@ -33,6 +43,11 @@ export class AppComponent {
             label: 'General',
             icon: 'fad fa-fw fa-user',
             routerLink: ['/profile/general']
+          },
+          {
+            label: 'Company',
+            icon: 'fad fa-fw fa-building',
+            routerLink: ['/profile/companies']
           },
           {
             label: 'Credentials',

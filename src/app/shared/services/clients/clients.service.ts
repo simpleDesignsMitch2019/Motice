@@ -3,6 +3,8 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { MessageService } from 'primeng/api';
 import { SubscriptionService } from '../../../shared/services/subscription/subscription.service';
+import { CompanyService } from '../../../shared/services/company/company.service';
+import { AuthService } from '../../../shared/services/auth/auth.service';
 import * as firebase from 'firebase/app';
 import { Client } from '../../../shared/interfaces/client';
 
@@ -11,7 +13,7 @@ import { Client } from '../../../shared/interfaces/client';
 })
 export class ClientsService {
 
-  constructor( private subscriptionService: SubscriptionService, public messageService: MessageService, public afStore: AngularFirestore, public afFunctions: AngularFireFunctions ) {
+  constructor( private authService: AuthService, private companyService: CompanyService, private subscriptionService: SubscriptionService, public messageService: MessageService, public afStore: AngularFirestore, public afFunctions: AngularFireFunctions ) {
   
   }
 
@@ -19,13 +21,33 @@ export class ClientsService {
     return new Promise((resolve, reject) => {
       let countMax;
       this.subscriptionService.subscription.subscribe((observer) => {
-        observer.subscribe((subscription) => {
-          if(subscription) {
-            countMax = null;
-          } else {
-            countMax = 2;
-          }
-          this.afStore.collection('clients').ref.where('owner', '==', 'simple-designs').get().then((clients) => {
+        if(observer) {
+          observer.subscribe((subscription) => {
+            if(subscription) {
+              countMax = null;
+            } else {
+              countMax = 2;
+            }
+            this.afStore.collection('clients').ref.where('owner', '==', localStorage.getItem('activeCompany')).get().then((clients) => {
+              if(!clients.empty) {
+                resolve(true);
+              } else {
+                if(countMax) {
+                  if(clients.size < countMax) {
+                    resolve(true);
+                  } else if(clients.size == countMax) {
+                    reject(false);
+                  }
+                } else {
+                  resolve(true);
+                }
+              }
+            }).catch((error) => {
+              reject(error);
+            });
+          });
+        } else {
+          this.afStore.collection('clients').ref.where('owner', '==', localStorage.getItem('activeCompany')).get().then((clients) => {
             if(!clients.empty) {
               resolve(true);
             } else {
@@ -42,14 +64,14 @@ export class ClientsService {
           }).catch((error) => {
             reject(error);
           });
-        });
+        }
       });
     })
   }
 
   GetClients() {
     return new Promise((resolve, reject) => {
-      this.afStore.collection('clients').ref.where('owner', '==', 'simple-designs').get().then((clients) => {
+      this.afStore.collection('clients').ref.where('owner', '==', localStorage.getItem('activeCompany')).get().then((clients) => {
         if(clients.empty) {
           reject('no-clients-found');
         } else {
@@ -85,7 +107,7 @@ export class ClientsService {
     return new Promise((resolve, reject) => {
       this.CheckSubscription().then((result) => {
         if(result) {
-          data['owner'] = 'simple-designs';
+          data['owner'] = localStorage.getItem('activeCompany');
           data['createdOn'] = new Date();
           data['updatedOn'] = new Date();
           this.afStore.collection('clients').add(data).then((value) => {

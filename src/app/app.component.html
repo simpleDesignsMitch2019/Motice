@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand navbar-dark bg-primary animated fadeIn fixed-top" *ngIf="user">
-  <a class="navbar-brand" [routerLink]="['/dashboard']">Motice</a>
+  <a class="navbar-brand" [routerLink]="['/dashboard']">
+    <span *ngIf="company?.dba">{{company?.dba}}</span>
+    <span *ngIf="!company?.dba">{{company?.name}}</span>
+  </a>
 
   <div class="navbar-collapse collapse">
     <ul class="navbar-nav mr-auto">

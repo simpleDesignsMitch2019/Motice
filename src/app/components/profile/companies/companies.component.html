@@ -1,0 +1,131 @@
+
+<h5 class="font-weight-light border-bottom pb-2">My Company</h5>
+
+<form [formGroup]="companyDetailsForm">
+	<div class="form-row">
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Company Name</label>
+				<div class="input-group">
+					<div class="input-group-prepend" *ngIf="nameChecked">
+						<span class="input-group-text" *ngIf="nameChecking">
+							<i class="fad fa-spinner fa-spin text-primary"></i>
+						</span>
+						<span class="input-group-text" *ngIf="!nameChecking && nameAvailable">
+							<i class="fad fa-check text-success"></i>
+						</span>
+						<span class="input-group-text" *ngIf="!nameChecking && !nameAvailable">
+							<i class="fad fa-times text-danger"></i>
+						</span>
+					</div>
+					<input #name type="name" formControlName="name" class="form-control" required (blur)="checkName()">
+				</div>
+				<small class="form-text text-danger" *ngIf="nameChecked && !nameChecking && !nameAvailable">
+					{{name.value}} is already taken!
+				</small>
+				<small class="form-text text-success" *ngIf="nameChecked && !nameChecking && nameAvailable">
+					{{name.value}} is available!
+				</small>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Doing Business As <small><i>(optional)</i></small></label>
+				<input type="text" formControlName="dba" class="form-control">
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Federal EIN <small><i>(optional)</i></small></label>
+				<p-inputMask mask="**-*******" formControlName="ein" styleClass="form-control" slotChar=" "></p-inputMask>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Logo <small><i>(optional)</i></small></label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<button class="btn btn-outline-secondary" type="button" (click)="fileSelector.click()">
+							<i class="fad fa-upload"></i>
+						</button>
+						<input #fileSelector type="file" style="display:none;" (change)="logoUpload($event)" accept="image/x-png,image/jpeg"/>
+					</div>
+					<input type="name" formControlName="logo" class="form-control">
+				</div>
+				<small class="form-text text-muted">Must be an image in JPEG or PNG format.</small>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Email Address</label>
+				<input type="email" formControlName="email" class="form-control" required>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Phone Number</label>
+				<p-inputMask mask="(999) 999-9999" formControlName="phone" styleClass="form-control" slotChar=" "></p-inputMask>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Fax <small><i>(optional)</i></small></label>
+				<p-inputMask mask="(999) 999-9999" formControlName="fax" styleClass="form-control" slotChar=" "></p-inputMask>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Address Line 1</label>
+				<input type="text" formControlName="addressLine1" class="form-control" required>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Address Line 2 <small><i>(optional)</i></small></label>
+				<input type="text" formControlName="addressLine2" class="form-control">
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">City</label>
+				<input type="text" formControlName="city" class="form-control" required>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">State</label>
+				<input type="text" formControlName="state" class="form-control" required minlength="2" maxlength="2">
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Zip Code</label>
+				<p-inputMask mask="99999" formControlName="zip_code" styleClass="form-control" slotChar=" "></p-inputMask>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Support Email</label>
+				<input type="email" formControlName="support_email" class="form-control" required>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Support Phone Number</label>
+				<p-inputMask mask="(999) 999-9999" formControlName="support_phone" styleClass="form-control" slotChar=" "></p-inputMask>
+			</div>
+		</div>
+	</div>
+</form>
+
+<div class="footer border-top pt-2">
+	<button class="btn btn-primary float-right" [disabled]="!companyDetailsForm.valid" (click)="update()">Save Changes</button>
+</div>
+
+
