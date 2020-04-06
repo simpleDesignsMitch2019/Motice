@@ -55,6 +55,7 @@ import { CompaniesComponent } from './components/profile/companies/companies.com
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { NotesComponent } from './components/notes/notes.component';
+import { TimeFormatPipe } from './shared/pipes/time-format.pipe';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     "bgsColor": "#007bff",
@@ -107,7 +108,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         CompaniesComponent,
         CalendarComponent,
         TasksComponent,
-        NotesComponent
+        NotesComponent,
+        TimeFormatPipe
     ],
     imports: [
         BrowserModule,

@@ -14,10 +14,11 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "allowSyntheticDefaultImports" : true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": false,
-    "strictInjectionParameters": false,
+    "strictInjectionParameters": false
   }
 }

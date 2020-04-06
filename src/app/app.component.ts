@@ -18,7 +18,7 @@ export class AppComponent {
   public leftSidebarVisible: boolean = false;
   public topBarMenuItems: object = [];
 
-  public calendarSidebarVisible: boolean = false;
+  public calendarSidebarVisible: boolean = true;
   public tasksSidebarVisible: boolean = false;
   public notesSidebarVisible: boolean = false;
 

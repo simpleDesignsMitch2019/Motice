@@ -1,0 +1,17 @@
+.th-day {
+	cursor: pointer;
+}
+
+.events-wrapper {
+	height: 60%;
+	overflow: scroll;
+}
+
+span.time{
+	min-width: 25% !important;
+	font-size: 12px;
+}
+
+span.time a {
+	font-size: 14px;
+}
