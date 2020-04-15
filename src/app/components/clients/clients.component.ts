@@ -45,9 +45,9 @@ export class ClientsComponent implements OnInit {
   }
 
   loadClients() {
-    this.clientCount = 0;
-    this.newClientsThisMonth = 0;
     this.clientsService.GetClients().then((clients:any) => {
+      this.clientCount = 0;
+      this.newClientsThisMonth = 0;
       this.clientCount = clients.length;
       this.clients = clients;
       this.filteredClients = this.clients;
