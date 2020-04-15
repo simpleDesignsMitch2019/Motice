@@ -64,7 +64,7 @@
 
 <ngx-ui-loader></ngx-ui-loader>
 
-<p-sidebar [(visible)]="calendarSidebarVisible" position="right" styleClass="ui-sidebar-sm p-0" appendTo="body" [showCloseIcon]="false">
+<p-sidebar [dismissible]="false" [modal]="false" [(visible)]="calendarSidebarVisible" position="right" [styleClass]="calSidebarStyleClass" appendTo="body" [showCloseIcon]="false">
   <app-calendar></app-calendar>
 </p-sidebar>
 

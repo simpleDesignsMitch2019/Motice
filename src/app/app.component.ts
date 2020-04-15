@@ -18,6 +18,7 @@ export class AppComponent {
   public leftSidebarVisible: boolean = false;
   public topBarMenuItems: object = [];
 
+  public calSidebarStyleClass: string = 'ui-sidebar-sm p-0';
   public calendarSidebarVisible: boolean = true;
   public tasksSidebarVisible: boolean = false;
   public notesSidebarVisible: boolean = false;

@@ -1,6 +1,7 @@
 
 @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css');
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 
 html {
 	height: 100%;
@@ -32,6 +33,45 @@ a {
 	cursor: pointer;
 }
 
+.col {
+	position: relative;
+}
+
+.ui-widget-header .ui-inputtext, .ui-widget-content .ui-inputtext {
+	display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.ui-inputtext:hover {
+	border-color: #80bdff !important;
+}
+
+.twitter-picker {
+	width: 100% !important;
+	box-shadow: none !important;
+	padding: 0px !important;
+}
+
+.twitter-body {
+	padding-top: 0px !important;
+	padding-left: 0px !important;
+}
+
+.ui-calendar {
+	width: 100% !important;
+}
+
 .bg-light-gray {
 	background-color: #e9ecef !important;
 }
@@ -42,6 +82,21 @@ a {
 
 .ui-sidebar {
 	padding-top: 60px !important;
+}
+
+.ui-inputswitch {
+	margin-top: 0.3em;
+}
+
+.fc-header-toolbar {
+	margin-bottom: 0 !important;
+}
+
+.fc-button {
+	color: #17a2b8 !important;
+	border-radius: 0px !important;
+	border-color: transparent !important;
+	background-color: transparent !important;
 }
 
 .mainSidebar > .list-group > .list-group-item, .mainSidebar > .sidebar-footer > .list-group > .list-group-item {

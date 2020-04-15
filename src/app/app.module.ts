@@ -16,6 +16,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
+import { ColorTwitterModule } from 'ngx-color/twitter';
+
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
@@ -24,6 +28,9 @@ import { TooltipModule } from 'primeng/tooltip';
 import { MessageService } from 'primeng/api';
 import { PanelModule } from 'primeng/panel';
 import { InputMaskModule } from 'primeng/inputmask';
+import { CalendarModule } from 'primeng/calendar';
+import { FullCalendarModule } from 'primeng/fullcalendar';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
@@ -56,6 +63,9 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { NotesComponent } from './components/notes/notes.component';
 import { TimeFormatPipe } from './shared/pipes/time-format.pipe';
+import { HoverClassDirective } from './shared/directives/hoverClass/hover-class.directive';
+import { NewEventComponent } from './components/calendar/new-event/new-event.component';
+import { EditEventComponent } from './components/calendar/edit-event/edit-event.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     "bgsColor": "#007bff",
@@ -109,7 +119,10 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         CalendarComponent,
         TasksComponent,
         NotesComponent,
-        TimeFormatPipe
+        TimeFormatPipe,
+        HoverClassDirective,
+        NewEventComponent,
+        EditEventComponent
     ],
     imports: [
         BrowserModule,
@@ -130,11 +143,17 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         PanelModule,
         DynamicDialogModule,
         MenuModule,
+        CalendarModule,
         SweetAlert2Module.forRoot(),
         Ng2SearchPipeModule,
-        InputMaskModule
+        InputMaskModule,
+        ColorTwitterModule,
+        FullCalendarModule,
+        OwlDateTimeModule,
+        OwlNativeDateTimeModule,
+        InputSwitchModule
     ],
-    providers: [MessageService, DialogService, ClientsComponent],
+    providers: [MessageService, DialogService, ClientsComponent, NewEventComponent, EditEventComponent],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

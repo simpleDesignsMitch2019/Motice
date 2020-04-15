@@ -1,0 +1,70 @@
+
+<form [formGroup]="eventForm">
+	<div class="row">
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Title</label>
+				<input type="text" formControlName="title" class="form-control" required />
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Url</label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							http://
+						</span>
+					</div>
+					<input #url type="url" formControlName="url" class="form-control" placeholder="www.example.com" />
+					<div class="input-group-append" *ngIf="url.value">
+						<a [href]="url.value" target="_blank" class="btn btn-secondary"><i class="fad fa-external-link"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<label class="control-label">Event Start</label>
+			<div class="input-group">
+		    	<input type="text" formControlName="start" class="form-control" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+		    	<div class="input-group-append">
+		    		<span class="input-group-text py-0">
+		    			<p-inputSwitch formControlName="allDay"></p-inputSwitch>
+		    		</span>
+		    	</div>
+		    </div>
+		    <owl-date-time #dt [hour12Timer]="true"></owl-date-time>
+		</div>
+		<div class="col">
+			<label class="control-label">Event End</label>
+		    <input type="text" formControlName="end" class="form-control" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
+		    <owl-date-time #dt2 [hour12Timer]="true"></owl-date-time>
+		</div>
+	</div>
+	<div class="row pt-3">
+		<div class="col">
+			<div class="form-group">
+				<label class="control-label">Description</label>
+				<textarea #desc formControlName="description" class="form-control" required minlength="2" maxlength="500"></textarea>
+				<small class="form-text text-muted float-right">{{desc?.value?.length}}/500</small>
+			</div>
+		</div>
+		<div class="col">
+			<div class="input-group">
+				<label class="control-label">Event Color</label>
+				<color-twitter [color]="bgColor" triangle="none" (onChangeComplete)="updateColor($event)"></color-twitter>
+			</div>
+		</div>
+	</div>
+	<div class="row pt-2 mt-3 border-top" style="background-color:#f4f4f4">
+		<div class="col d-flex justify-content-between align-items-center">
+			<div class="btn-group p-0 m-0">
+				<button class="btn btn-sm btn-outline-secondary" (click)="close()">Cancel</button>
+				<button class="btn btn-sm btn-danger" (click)="delete()">Delete</button>
+			</div>
+			<button class="btn btn-sm btn-outline-primary" (click)="updateEvent()">Update</button>
+		</div>
+	</div>
+</form>
