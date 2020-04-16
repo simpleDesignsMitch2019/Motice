@@ -31,6 +31,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
@@ -62,18 +63,23 @@ import { CompaniesComponent } from './components/profile/companies/companies.com
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { NotesComponent } from './components/notes/notes.component';
-import { TimeFormatPipe } from './shared/pipes/time-format.pipe';
 import { HoverClassDirective } from './shared/directives/hoverClass/hover-class.directive';
 import { NewEventComponent } from './components/calendar/new-event/new-event.component';
 import { EditEventComponent } from './components/calendar/edit-event/edit-event.component';
+import { UsersComponent } from './components/settings/users/users.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { ReplacePipe } from './shared/pipes/replace.pipe';
+import { BrandingComponent } from './components/settings/branding/branding.component';
+import { ChartOfAccountsComponent } from './components/settings/chart-of-accounts/chart-of-accounts.component';
+import { CalSettsComponent } from './components/settings/cal-setts/cal-setts.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     "bgsColor": "#007bff",
-    "bgsOpacity": 0.5,
+    "bgsOpacity": 1.0,
     "bgsPosition": "bottom-right",
     "bgsSize": 60,
     "bgsType": "fading-circle",
-    "blur": 12,
+    "blur": 100,
     "delay": 0,
     "fastFadeOut": true,
     "fgsColor": "#007bff",
@@ -119,10 +125,15 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         CalendarComponent,
         TasksComponent,
         NotesComponent,
-        TimeFormatPipe,
         HoverClassDirective,
         NewEventComponent,
-        EditEventComponent
+        EditEventComponent,
+        UsersComponent,
+        SettingsComponent,
+        ReplacePipe,
+        BrandingComponent,
+        ChartOfAccountsComponent,
+        CalSettsComponent
     ],
     imports: [
         BrowserModule,
@@ -151,7 +162,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         FullCalendarModule,
         OwlDateTimeModule,
         OwlNativeDateTimeModule,
-        InputSwitchModule
+        InputSwitchModule,
+        AutoCompleteModule
     ],
     providers: [MessageService, DialogService, ClientsComponent, NewEventComponent, EditEventComponent],
     bootstrap: [AppComponent]

@@ -76,4 +76,8 @@
   <app-notes></app-notes>
 </p-sidebar>
 
+<p-sidebar [(visible)]="settingsSidebarVisible" position="right" styleClass="noPadding h-100 ui-sidebar-xl p-0 border-0" [fullScreen]="false" appendTo="body" [showCloseIcon]="false" [baseZIndex]="999">
+  <app-settings></app-settings>
+</p-sidebar>
+
 

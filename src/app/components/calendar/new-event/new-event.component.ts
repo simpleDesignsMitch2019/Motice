@@ -15,6 +15,8 @@ import * as range from 'lodash.range';
 })
 export class NewEventComponent implements OnInit {
 
+  public settings: any;
+
   public selectedMoment = new Date();
   public eventForm: FormGroup;
   public bgColor: string = '#FF6900';
@@ -22,6 +24,8 @@ export class NewEventComponent implements OnInit {
   constructor( private calendarService: CalendarService, public ref: DynamicDialogRef, public config: DynamicDialogConfig ) { }
 
   ngOnInit(): void {
+    this.settings = this.calendarService.defaultSettings;
+    this.bgColor = this.settings.defaultEventColor;
     this.eventForm = new FormGroup({
       'title' : new FormControl('', [Validators.required]),
       'description' : new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(500)]),
@@ -44,7 +48,7 @@ export class NewEventComponent implements OnInit {
       this.eventForm.controls['end'].disable();
     } else {
       this.eventForm.controls['start'].setValue(new Date());
-      let end = new Date(moment(new Date()).add(30, 'minutes').toDate());
+      let end = new Date(moment(new Date()).add(this.settings.defaultEventLength.duration, this.settings.defaultEventLength.paramater).toDate());
       this.eventForm.controls['end'].setValue(end);
     }
     this.eventForm.controls['allDay'].valueChanges.subscribe((value) => {
@@ -65,9 +69,18 @@ export class NewEventComponent implements OnInit {
     });
     this.eventForm.controls['start'].valueChanges.subscribe((value) => {
       if(value) {
-        this.eventForm.controls['end'].setValue(new Date(moment(this.eventForm.controls['start'].value).add(30, 'minutes').toDate()));
+        this.eventForm.controls['end'].setValue(new Date(moment(this.eventForm.controls['start'].value).add(this.settings.defaultEventLength.duration, this.settings.defaultEventLength.paramater).toDate()));
       }
-    })
+    });
+    this.calendarService.settings.subscribe((observer) => {
+      observer.subscribe((settings) => {
+        this.settings = settings;
+        this.bgColor = settings.defaultEventColor;
+        let end = new Date(moment(new Date()).add(settings.defaultEventLength.duration, settings.defaultEventLength.paramater).toDate());
+        this.eventForm.controls['end'].setValue(end);
+        this.eventForm.controls['backgroundColor'].setValue(settings.defaultEventColor);
+      });
+    });
   }
 
   updateColor($event) {

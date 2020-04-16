@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expanded-lg navbar-dark bg-secondary">
+	<a class="navbar-brand" [routerLink]="">Settings</a>
+	<div class="">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" (click)="close();">
+					<i class="fad fa-times"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+<div class="row h-100 no-gutters">
+	<div class="col-sm-2 h-100">
+		<div class="sidebar border-right h-100 shadow pt-5">
+			<div class="list-group list-group-flush">
+				<a href [routerLink]="" class="list-group-item list-group-item-action" (click)="setActiveSetting('branding');" [ngClass]="{'active' : activeSetting == 'branding'}">
+					<i class="fad mr-2 fa-fw fa-ring"></i> Branding
+				</a>
+				<a href [routerLink]="" class="list-group-item list-group-item-action" (click)="setActiveSetting('calendar');" [ngClass]="{'active' : activeSetting == 'calendar'}">
+					<i class="fad mr-2 fa-fw fa-calendar"></i> Calendar
+				</a>
+				<a href [routerLink]="" class="list-group-item list-group-item-action" (click)="setActiveSetting('users');" [ngClass]="{'active' : activeSetting == 'users'}">
+					<i class="fad mr-2 fa-fw fa-users"></i> Users
+				</a>
+				<a href [routerLink]="" class="list-group-item list-group-item-action" (click)="setActiveSetting('chart-of-accounts');" [ngClass]="{'active' : activeSetting == 'chart-of-accounts'}">
+					<i class="fad mr-2 fa-fw fa-chart-line"></i> Chart Of Accounts
+				</a>
+			</div>
+			<div class="list-group list-group-flush footer">
+				<a href="http://help.motice.io" target="_blank" class="list-group-item list-group-item-action list-group-item-info">
+					<i class="fad mr-2 fa-fw fa-life-ring"></i> Help & Support
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-10">
+		<div class="py-2 px-3 header d-flex justify-content-between align-items-center border-bottom">
+			<h4 class="font-weight-light">{{activeSetting | replace:'-':' ' | titlecase}}</h4>
+		</div>
+		<div class="p-3 body">
+			<app-branding [hidden]="activeSetting !== 'branding'"></app-branding>
+			<app-cal-setts [hidden]="activeSetting !== 'calendar'"></app-cal-setts>
+			<app-users [hidden]="activeSetting !== 'users'"></app-users>
+			<app-chart-of-accounts [hidden]="activeSetting !== 'chart-of-accounts'"></app-chart-of-accounts>
+		</div>
+	</div>
+</div>

@@ -29,6 +29,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.0.1",
     "@sweetalert2/ngx-sweetalert2": "^8.0.0",
     "firebase": "^7.12.0",
+    "locale-codes": "^1.1.0",
     "lodash.range": "^3.2.0",
     "moment": "^2.24.0",
     "ng-pick-datetime": "^7.0.0",

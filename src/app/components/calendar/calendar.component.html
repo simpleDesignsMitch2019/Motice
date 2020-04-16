@@ -30,5 +30,5 @@
 
 <div class="h-100" style="overflow: scroll;">
 	<p-fullCalendar #fc [events]="events" [options]="dayOptions"></p-fullCalendar>
-	<p-fullCalendar *ngIf="view == 'dayGridMonth'" #ec [events]="events" [options]="eventCalOptions"></p-fullCalendar>
+	<p-fullCalendar [hidden]="view != 'dayGridMonth'" #ec [events]="events" [options]="eventCalOptions"></p-fullCalendar>
 </div>

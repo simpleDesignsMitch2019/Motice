@@ -9,6 +9,8 @@ import { EditEventComponent } from './edit-event/edit-event.component';
 
 import { Event } from '../../shared/interfaces/event';
 
+import allLocales from '@fullcalendar/core/locales-all';
+
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -22,6 +24,8 @@ import * as range from 'lodash.range';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+
+  public settings: any;
 
   @ViewChild('fc') public fc: FullCalendar;
   @ViewChild('ec') public ec: FullCalendar;
@@ -40,12 +44,17 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.settings = this.calendarService.defaultSettings;
+
     this.selectedDate = moment().toDate();
     
     this.dayOptions = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       defaultDate: moment().toDate(),
-      nowIndicator: true,
+      nowIndicator: this.settings.nowIndicator,
+      weekends: this.settings.includeWeekends,
+      locale: this.settings.defaultLocale,
+      firstDay: this.settings.weekStart,
       height: "parent",
       defaultView: this.view,
       header: {
@@ -78,7 +87,10 @@ export class CalendarComponent implements OnInit {
     this.eventCalOptions = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       defaultDate: this.selectedDate,
-      nowIndicator: true,
+      nowIndicator: this.settings.nowIndicator,
+      weekends: this.settings.includeWeekends,
+      locale: this.settings.defaultLocale,
+      firstDay: this.settings.weekStart,
       selectable: true,
       allDayText: 'All Day',
       columnHeaderFormat: {
@@ -103,6 +115,23 @@ export class CalendarComponent implements OnInit {
     }
 
     this.getEvents();
+
+    this.calendarService.settings.subscribe((observer) => {
+      observer.subscribe((settings) => {
+        this.settings = settings;
+        switch(settings.defaultView) {
+          case 'day' :
+            this.changeView('timeGridDay');
+          break;
+          case 'week' : 
+            this.changeView('timeGridWeek');
+          break;
+          case 'month' :
+            this.changeView('dayGridMonth');
+          break;
+        }
+      });
+    });
 
   }
 
@@ -185,13 +214,30 @@ export class CalendarComponent implements OnInit {
   changeView(view):void {
     if(view == 'timeGridDay') {
       this.fc.getCalendar().setOption('selectable', true);
+      this.fc.getCalendar().setOption('weekends', this.settings.includeWeekends);
+      this.fc.getCalendar().setOption('nowIndicator', this.settings.nowIndicator);
+      this.fc.getCalendar().setOption('locale', this.settings.defaultLocale);
+      this.fc.getCalendar().setOption('firstDay', this.settings.weekStart);
       this.appComponent.calSidebarStyleClass = 'ui-sidebar-sm p-0';
     } else if(view == 'timeGridWeek') {
       this.fc.getCalendar().setOption('selectable', true);
+      this.fc.getCalendar().setOption('weekends', this.settings.includeWeekends);
+      this.fc.getCalendar().setOption('nowIndicator', this.settings.nowIndicator);
+      this.fc.getCalendar().setOption('locale', this.settings.defaultLocale);
+      this.fc.getCalendar().setOption('firstDay', this.settings.weekStart);
       this.appComponent.calSidebarStyleClass = 'ui-sidebar-md p-0';
     } else if(view == 'dayGridMonth') {
       this.fc.getCalendar().setOption('selectable', false);
+      this.fc.getCalendar().setOption('weekends', this.settings.includeWeekends);
+      this.fc.getCalendar().setOption('nowIndicator', this.settings.nowIndicator);
+      this.fc.getCalendar().setOption('locale', this.settings.defaultLocale);
+      this.fc.getCalendar().setOption('firstDay', this.settings.weekStart);
       this.appComponent.calSidebarStyleClass = 'ui-sidebar-lg p-0';
+      setTimeout(() => {
+        this.ec.getCalendar().setOption('weekends', this.settings.includeWeekends);
+        this.ec.getCalendar().setOption('nowIndicator', this.settings.nowIndicator);
+        this.ec.getCalendar().setOption('locale', this.settings.defaultLocale);
+      });
     }
     this.view = view;
     this.fc.getCalendar().changeView(view);

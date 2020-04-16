@@ -1,0 +1,17 @@
+
+.list-group-item-action:hover {
+	color: #212529;
+    background-color: #e9ecef;
+}
+
+.list-group-item-action.active:hover {
+	color: #fff;
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.footer {
+	width: 100%;
+	position: absolute;
+	bottom: 60px;
+}

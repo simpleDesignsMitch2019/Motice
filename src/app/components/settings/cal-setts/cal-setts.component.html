@@ -1,0 +1,64 @@
+
+<form [formGroup]="form">
+	<div class="form-group row border-bottom pb-3 mb-4">
+		<label class="col-sm-2 col-form-label">Default View</label>
+		<div class="col-sm-10">
+			<select class="form-control" formControlName="defaultView" (change)="update()">
+				<option *ngFor="let view of viewOptions" [ngValue]="view">{{view | titlecase}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group row border-bottom pb-3 mb-4">
+		<label class="col-sm-2 col-form-label">Default Event Length</label>
+		<div class="col-sm-10">
+			<div class="input-group">
+				<select (change)="update()" class="form-control" formControlName="eventDuration" *ngIf="settings?.defaultEventLength?.paramater === 'minutes'">
+					<option *ngFor="let duration of minuteDurations" [ngValue]="duration">{{duration}}</option>
+				</select>
+				<select (change)="update()" class="form-control" formControlName="eventDuration" *ngIf="settings?.defaultEventLength?.paramater === 'hours'">
+					<option *ngFor="let duration of hourDurations" [ngValue]="duration">{{duration}}</option>
+				</select>
+				<span ngbDropdown class="input-group-append">
+					<button class="btn btn-outline-dark" id="dropdownBasic1" ngbDropdownToggle>{{settings?.defaultEventLength?.paramater | titlecase}}</button>
+					<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+						<button *ngFor="let paramater of paramaters" (click)="settings.defaultEventLength.paramater = paramater; update();"ngbDropdownItem>{{paramater | titlecase}}</button>
+					</div>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="form-group row border-bottom pb-3 mb-4">
+		<label class="col-sm-2 col-form-label">Weeks Start On</label>
+		<div class="col-sm-10">
+			<select class="form-control" formControlName="weekStarts" (change)="update()">
+				<option *ngFor="let day of dayOptions" [ngValue]="day.number">{{day.name | titlecase}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group row border-bottom pb-3 mb-4">
+		<label class="col-sm-2 col-form-label">Default Locale</label>
+		<div class="col-sm-10">
+			<select class="form-control" formControlName="defaultLocale" (change)="update()">
+				<option *ngFor="let locale of localeOptions" [ngValue]="locale.tag">{{locale.name}} <span *ngIf="locale.location">--</span> {{locale.location}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group row border-bottom pb-3 mb-4">
+		<label class="col-sm-2 col-form-label">Include Weekends</label>
+		<div class="col-sm-10">
+			<p-inputSwitch formControlName="includeWeekends" (click)="update()"></p-inputSwitch>
+		</div>
+	</div>
+	<div class="form-group row border-bottom pb-3 mb-4">
+		<label class="col-sm-2 col-form-label">Display Now Indicator</label>
+		<div class="col-sm-10">
+			<p-inputSwitch formControlName="nowIndicator" (click)="update()"></p-inputSwitch>
+		</div>
+	</div>
+	<div class="form-group row border-bottom pb-3 mb-4">
+		<label class="col-sm-2 col-form-label">Default Event Color</label>
+		<div class="col-sm-10">
+			<color-twitter [color]="settings.defaultEventColor" (onChangeComplete)="updateColor($event)" triangle="none"></color-twitter>
+		</div>
+	</div>
+</form>

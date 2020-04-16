@@ -1,0 +1,29 @@
+
+<div class="row mb-4 pb-3 border-bottom">
+	<div class="col">
+		<div class="form-group">
+			<label class="control-label">Primary Color</label>
+			<color-twitter [color]="primaryColor" (onChangeComplete)="updateColor($event, 'primary')" triangle="top-left"></color-twitter>
+		</div>
+	</div>
+	<div class="col">
+		<div class="form-group">
+			<label class="control-label">Secondary Color</label>
+			<color-twitter [color]="secondaryColor" (onChangeComplete)="updateColor($event, 'secondary')" triangle="top-left"></color-twitter>
+		</div>
+	</div>
+	<div class="col">
+
+	</div>
+</div>
+
+<ng-template #rt let-r="result" let-t="term">
+	<ngb-highlight [style.fontSize.px]="18" [style.fontFamily]="r" [result]="r" [term]="t"></ngb-highlight>
+</ng-template>
+
+<div class="form-group row">
+	<label class="col-sm-2 col-form-label">Font Family</label>
+	<div class="col-sm-10">
+		<input id="typeahead-focus" [style.fontFamily]="primaryFont" type="text" class="form-control" [(ngModel)]="primaryFont" [ngbTypeahead]="search" (focus)="focus$.next($any($event).target.value)" [resultTemplate]="rt" (click)="click$.next($any($event).target.value)" #instance="ngbTypeahead" [editable]="false"/>
+	</div>
+</div>

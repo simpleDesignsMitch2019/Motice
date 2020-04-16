@@ -32,7 +32,6 @@ export class EditEventComponent implements OnInit {
       'url' : new FormControl('', [Validators.required]),
       'backgroundColor' : new FormControl('', [Validators.required])
     });
-    console.log(this.config.data);
     if(this.config.data) {
       this.eventForm.controls['title'].setValue(this.config.data.title);
       this.eventForm.controls['description'].setValue(this.config.data.extendedProps.description);

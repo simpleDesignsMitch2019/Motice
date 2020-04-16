@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from './shared/services/auth/auth.service';
 import { CompanyService } from './shared/services/company/company.service';
+import { BrandingService } from './shared/services/branding/branding.service';
 import { User } from './shared/interfaces/user';
 import { Company } from './shared/interfaces/company';
 
@@ -19,11 +20,12 @@ export class AppComponent {
   public topBarMenuItems: object = [];
 
   public calSidebarStyleClass: string = 'ui-sidebar-sm p-0';
-  public calendarSidebarVisible: boolean = true;
+  public calendarSidebarVisible: boolean = false;
   public tasksSidebarVisible: boolean = false;
   public notesSidebarVisible: boolean = false;
+  public settingsSidebarVisible: boolean = true;
 
-  constructor(public authService: AuthService, public companyService: CompanyService, private router: Router) {
+  constructor(public authService: AuthService, public companyService: CompanyService, public brandingService: BrandingService, private router: Router) {
     authService.user.subscribe((user) => {
       if(user && !user.emailVerified) {
         this.user = null;
@@ -104,7 +106,13 @@ export class AppComponent {
           {
             label: 'Settings',
             icon: 'fad fa-fw fa-cog text-primary',
-            routerLink: ['/settings']
+            command: (event) => {
+              this.settingsSidebarVisible = !this.settingsSidebarVisible;
+              this.leftSidebarVisible = false;
+              this.calendarSidebarVisible = false;
+              this.tasksSidebarVisible = false;
+              this.notesSidebarVisible = false;
+            }
           },
           {
             label: 'Logout',
