@@ -20,26 +20,28 @@ export class BrandingService {
   }
 
   private setBranding() {
-    this.ngxService.start();
-    this.afs.collection('companies').doc(localStorage.getItem('activeCompany')).collection('settings').doc('branding').ref.get().then((dataSnapshot) => {
-      if(dataSnapshot.exists) {
-        for (var i = this.objects.length - 1; i >= 0; i--) {
-          let object = this.objects[i];
-          if(dataSnapshot.data()[object]){
-            this.setObject(object, dataSnapshot.data()[object]);
-          } else {
+    if(localStorage.getItem('activeCompany') !== null) {
+      this.ngxService.start();
+      this.afs.collection('companies').doc(localStorage.getItem('activeCompany')).collection('settings').doc('branding').ref.get().then((dataSnapshot) => {
+        if(dataSnapshot.exists) {
+          for (var i = this.objects.length - 1; i >= 0; i--) {
+            let object = this.objects[i];
+            if(dataSnapshot.data()[object]){
+              this.setObject(object, dataSnapshot.data()[object]);
+            } else {
+              this.setObject(object, this.defaults[object]);
+            }
+          }
+          this.ngxService.stop();
+        } else {
+          for (var i = this.objects.length - 1; i >= 0; i--) {
+            let object = this.objects[i];
             this.setObject(object, this.defaults[object]);
           }
+          this.ngxService.stop();
         }
-        this.ngxService.stop();
-      } else {
-        for (var i = this.objects.length - 1; i >= 0; i--) {
-          let object = this.objects[i];
-          this.setObject(object, this.defaults[object]);
-        }
-        this.ngxService.stop();
-      }
-    })
+      })
+    }
   }
 
   public setObject(object:string, value:string) {
@@ -48,22 +50,26 @@ export class BrandingService {
 
   public getBranding() {
     return new Promise((resolve, reject) => {
-      this.afs.collection('companies').doc(localStorage.getItem('activeCompany')).collection('settings').doc('branding').ref.get().then((dataSnapshot) => {
-        if(dataSnapshot.exists) {
-          let branding = [];
-          for (var i = this.objects.length - 1; i >= 0; i--) {
-            let object = this.objects[i];
-            if(dataSnapshot.data()[object]){
-              branding[object] = dataSnapshot.data()[object];
-            } else {
-              branding[object] = this.defaults[object];
+      if(localStorage.getItem('activeCompany') !== null) {
+        this.afs.collection('companies').doc(localStorage.getItem('activeCompany')).collection('settings').doc('branding').ref.get().then((dataSnapshot) => {
+          if(dataSnapshot.exists) {
+            let branding = [];
+            for (var i = this.objects.length - 1; i >= 0; i--) {
+              let object = this.objects[i];
+              if(dataSnapshot.data()[object]){
+                branding[object] = dataSnapshot.data()[object];
+              } else {
+                branding[object] = this.defaults[object];
+              }
             }
+            resolve(branding);
+          } else {
+            resolve(this.defaults);
           }
-          resolve(branding);
-        } else {
-          resolve(this.defaults);
-        }
-      });
+        });
+      } else {
+        resolve(this.defaults);
+      }
     });
   }
 

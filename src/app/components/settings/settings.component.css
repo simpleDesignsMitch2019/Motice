@@ -15,3 +15,8 @@
 	position: absolute;
 	bottom: 60px;
 }
+
+.body {
+	overflow: scroll !important;
+	height: 89vh;
+}

@@ -39,7 +39,7 @@
 		<div class="py-2 px-3 header d-flex justify-content-between align-items-center border-bottom">
 			<h4 class="font-weight-light">{{activeSetting | replace:'-':' ' | titlecase}}</h4>
 		</div>
-		<div class="p-3 body">
+		<div class="px-3 body">
 			<app-branding [hidden]="activeSetting !== 'branding'"></app-branding>
 			<app-cal-setts [hidden]="activeSetting !== 'calendar'"></app-cal-setts>
 			<app-users [hidden]="activeSetting !== 'users'"></app-users>

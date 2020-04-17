@@ -117,20 +117,22 @@ export class CalendarComponent implements OnInit {
     this.getEvents();
 
     this.calendarService.settings.subscribe((observer) => {
-      observer.subscribe((settings) => {
-        this.settings = settings;
-        switch(settings.defaultView) {
-          case 'day' :
-            this.changeView('timeGridDay');
-          break;
-          case 'week' : 
-            this.changeView('timeGridWeek');
-          break;
-          case 'month' :
-            this.changeView('dayGridMonth');
-          break;
-        }
-      });
+      if(observer) {
+        observer.subscribe((settings) => {
+          this.settings = settings;
+          switch(settings.defaultView) {
+            case 'day' :
+              this.changeView('timeGridDay');
+            break;
+            case 'week' : 
+              this.changeView('timeGridWeek');
+            break;
+            case 'month' :
+              this.changeView('dayGridMonth');
+            break;
+          }
+        });
+      }
     });
 
   }

@@ -1,1 +1,29 @@
-<p>chart-of-accounts works!</p>
+
+<table class="table table-striped tableFixHead">
+	<thead>
+		<tr>
+			<th scope="col">Account</th>
+			<th scope="col" sortable="account_number" (sort)="onSort($event)">Account Number</th>
+			<th scope="col">Account Type</th>
+			<th scope="col" class="text-right">Motice Balance</th>
+		</tr>
+	</thead>
+	<tbody>
+		<ng-container *ngFor="let account of sortedAccounts"> 
+			<tr>
+				<td scope="row" class="font-weight-bold">{{account.account_name}}</td>
+				<td class="font-weight-bold">{{account.account_number}}</td>
+				<td>{{account.account_type}}</td>
+				<td class="text-right">{{account.balance | currency}}</td>
+			</tr>
+			<ng-container *ngIf="account.children">
+				<tr *ngFor="let child of account.children">
+					<td class="text-indent"><i class="fad fa-level-up fa-fw fa-flip-horizontal"></i> {{child.account_name}}</td>
+					<td class="text-muted">{{child.account_number}}</td>
+					<td>{{child.account_type}}</td>
+					<td class="text-right">{{child.balance | currency}}</td>
+				</tr>
+			</ng-container>
+		</ng-container>
+	</tbody>
+</table>

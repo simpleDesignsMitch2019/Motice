@@ -15,7 +15,8 @@
       "es2018",
       "dom"
     ],
-    "allowSyntheticDefaultImports" : true
+    "allowSyntheticDefaultImports" : true,
+    "resolveJsonModule" : true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": false,

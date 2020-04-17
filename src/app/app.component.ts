@@ -23,7 +23,7 @@ export class AppComponent {
   public calendarSidebarVisible: boolean = false;
   public tasksSidebarVisible: boolean = false;
   public notesSidebarVisible: boolean = false;
-  public settingsSidebarVisible: boolean = true;
+  public settingsSidebarVisible: boolean = false;
 
   constructor(public authService: AuthService, public companyService: CompanyService, public brandingService: BrandingService, private router: Router) {
     authService.user.subscribe((user) => {

@@ -64,20 +64,21 @@
 
 <ngx-ui-loader></ngx-ui-loader>
 
+
 <p-sidebar [dismissible]="false" [modal]="false" [(visible)]="calendarSidebarVisible" position="right" [styleClass]="calSidebarStyleClass" appendTo="body" [showCloseIcon]="false">
-  <app-calendar></app-calendar>
+    <app-calendar></app-calendar>
 </p-sidebar>
 
 <p-sidebar [(visible)]="tasksSidebarVisible" position="right" styleClass="ui-sidebar-sm p-0" appendTo="body" [showCloseIcon]="false">
-  <app-tasks></app-tasks>
+    <app-tasks></app-tasks>
 </p-sidebar>
 
 <p-sidebar [(visible)]="notesSidebarVisible" position="right" styleClass="ui-sidebar-sm p-0" appendTo="body" [showCloseIcon]="false">
-  <app-notes></app-notes>
+    <app-notes></app-notes>
 </p-sidebar>
 
 <p-sidebar [(visible)]="settingsSidebarVisible" position="right" styleClass="noPadding h-100 ui-sidebar-xl p-0 border-0" [fullScreen]="false" appendTo="body" [showCloseIcon]="false" [baseZIndex]="999">
-  <app-settings></app-settings>
+    <app-settings></app-settings>
 </p-sidebar>
 
 

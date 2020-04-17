@@ -22,6 +22,55 @@ if(live) {
 }
 const stripe = require('stripe')(stripeKey);
 
+// Setup new companies automatically when created based off of templates
+export const newCompanySetup = functions.firestore.document('companies/{companyId}').onCreate((snap, context) => {
+
+  return new Promise((resolve, reject) => {
+
+    // Get Default Branding Settings
+    admin.firestore().collection('defaults').doc('company_settings').collection('branding').get().then((dataSnapshot) => {
+
+      // Create Branding Records
+      dataSnapshot.forEach((branding) => {
+        snap.ref.collection('settings').doc('branding').set(branding.data(), {merge: true}).then((data) => { console.log(data); }).catch((error) => { console.log(error); });
+      });
+
+    }).then(() => {
+
+      // Get Default Calendar Settings
+      admin.firestore().collection('defaults').doc('company_settings').collection('calendar').get().then((dataSnapshot) => {
+        // Create Calendar Records
+        dataSnapshot.forEach((calendar) => {
+          snap.ref.collection('settings').doc('calendar').set(calendar.data(), {merge: true}).then((data) => { console.log(data); }).catch((error) => { console.log(error); });
+        });
+
+      }).then(() => {
+
+        // Get Default Chart of Accounts
+        admin.firestore().collection('defaults').doc('company_settings').collection('chart_of_accounts').get().then((dataSnapshot) => {
+          // Create Chart of Account Records
+          dataSnapshot.forEach((account) => {
+            snap.ref.collection('COAS').doc(account.id).set(account.data(), {merge: true}).then((data) => { console.log(data); }).catch((error) => { console.log(error); });
+          });
+
+        }).then(() => {
+
+          resolve('all-records-created');
+
+        }).catch((error) => {
+          reject(error);
+        });
+      }).catch((error) => {
+        reject(error);
+      });
+    }).catch((error) => {
+      reject(error);
+    });
+
+  });
+
+});
+
 // Send an email using third party application, SendGrid Mail
 /** Data Structure - Either provide text/html or a template ID for dynamic templates
   data = {

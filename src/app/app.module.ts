@@ -72,6 +72,7 @@ import { ReplacePipe } from './shared/pipes/replace.pipe';
 import { BrandingComponent } from './components/settings/branding/branding.component';
 import { ChartOfAccountsComponent } from './components/settings/chart-of-accounts/chart-of-accounts.component';
 import { CalSettsComponent } from './components/settings/cal-setts/cal-setts.component';
+import { NgbdSortableHeader } from './shared/directives/NgbdSortableHeader/ngbd-sortable-header.directive';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     "bgsColor": "#007bff",
@@ -133,7 +134,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         ReplacePipe,
         BrandingComponent,
         ChartOfAccountsComponent,
-        CalSettsComponent
+        CalSettsComponent,
+        NgbdSortableHeader
     ],
     imports: [
         BrowserModule,
